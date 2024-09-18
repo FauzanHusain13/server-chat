@@ -1,5 +1,5 @@
 import express from "express"
-import { loginUser, logoutUser, signUpuser } from "./controller.js"
+import { signUpuser, loginUser, logoutUser } from "./controller.js"
 const router = express.Router()
 
 router.post("/signup", signUpuser)
