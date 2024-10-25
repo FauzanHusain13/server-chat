@@ -7,9 +7,11 @@ import messageRoutes from "./app/message/router.js"
 import userRoutes from "./app/user/router.js"
 
 import connectToMongoDB from "./db/connect.js"
+import cors from "cors"
 
 const app = express()
 const PORT = 8000
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 dotenv.config()
 app.use(express.json())

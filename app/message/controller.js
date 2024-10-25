@@ -11,6 +11,12 @@ export const getMessages = async(req, res) => {
 
         }).populate("messages")
 
+        if(!conversation) {
+            conversation = await Conversation.create({
+                participants: [senderId, receiverId]
+            })
+        }
+
         res.status(200).json(conversation.messages)
     } catch (error) {
         res.status(500).json({ message: "Internal server error" })
