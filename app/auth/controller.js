@@ -10,18 +10,18 @@ export const signUpuser = async(req, res) => {
         // cek duplikat username
         const user = await User.findOne({ username })
         if(user) {
-            return res.status(400).json({ message: "sername already exists!" })
+            return res.status(400).json({ message: "username sudah ada!" })
         }
 
         // cek email
         const checkEmail = await validator.isEmail(email)
         if(!checkEmail) {
-            return res.status(400).json({ message: "email not valid!" })
+            return res.status(400).json({ message: "email tidak valid!" })
         }
 
         // cek password dan confirmPassword
         if(password !== confirmPassword) {
-            return res.status(400).json({ message: "password don't match!" })
+            return res.status(400).json({ message: "password dan konfirmasi password tidak sama!" })
         }
 
         // hash password
@@ -32,7 +32,7 @@ export const signUpuser = async(req, res) => {
         const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`
 
         const newUser = new User({
-            username,
+            username: username.toLowerCase(),
             email,
             password: hashedPassword,
             gender,
